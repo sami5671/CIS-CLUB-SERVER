@@ -26,6 +26,9 @@ async function run() {
   try {
     // =======================All collection==========================================
     const userCollection = client.db("CISClub").collection("users");
+    const programmingCardCollection = client
+      .db("CISClub")
+      .collection("programmingCard");
     // =================================================================
 
     // ----------------------User Related ApI------------------------------------------
@@ -60,6 +63,14 @@ async function run() {
       }
       res.send({ admin });
     });
+    // ====================card api=============================================
+
+    app.get("/programmingCard", async (req, res) => {
+      // console.log(req.headers);
+      const result = await programmingCardCollection.find().toArray();
+      res.send(result);
+    });
+
     // =================================================================
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
